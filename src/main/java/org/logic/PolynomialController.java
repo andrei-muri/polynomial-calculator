@@ -2,33 +2,53 @@ package org.logic;
 
 import org.model.Polynomial;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class PolynomialController {
-    List<Polynomial> polynomials;
 
-    public PolynomialController() {
-        this.polynomials = new ArrayList<>(2);
-    }
-    public void addPolynomial(String input) {
+    private void addPolynomial(String input, Polynomial p) {
         PolynomialExtractor extractor = new PolynomialExtractor();
-        Polynomial polynomial = new Polynomial();
         List<Map.Entry<Integer, Number>> monomials = extractor.extractPolynomials(input);
         if(monomials != null) {
             for(Map.Entry<Integer, Number> monomial : monomials) {
-                polynomial.addElement(monomial);
+                p.addElement(monomial);
             }
-            polynomials.add(polynomial);
         } else {
             throw new IllegalArgumentException("Invalid polynom type");
         }
     }
 
-    public void printPolynomials() {
-        for(Polynomial p : polynomials) {
-            System.out.println(p);
+    public Polynomial add(String input1, String input2) {
+        Polynomial p1 = new Polynomial();
+        addPolynomial(input1, p1);
+        Polynomial p2 = new Polynomial();
+        addPolynomial(input2, p2);
+        Polynomial result = new Polynomial();
+
+        for(Map.Entry<Integer, Number> monomial : p1.getMonomials().entrySet()) {
+            result.addElement(monomial);
         }
+        for(Map.Entry<Integer, Number> monomial : p2.getMonomials().entrySet()) {
+            result.addElement(monomial);
+        }
+        return result;
+    }
+
+    public Polynomial subtract(String input1, String input2) {
+        Polynomial p1 = new Polynomial();
+        addPolynomial(input1, p1);
+        Polynomial p2 = new Polynomial();
+        addPolynomial(input2, p2);
+        Polynomial result = new Polynomial();
+
+        for(Map.Entry<Integer, Number> monomial : p1.getMonomials().entrySet()) {
+            result.addElement(monomial);
+        }
+        for(Map.Entry<Integer, Number> monomial : p2.getMonomials().entrySet()) {
+            p2.getMonomials().put(monomial.getKey(), (Double)monomial.getValue() * -1);
+            result.addElement(monomial);
+        }
+        return result;
     }
 }

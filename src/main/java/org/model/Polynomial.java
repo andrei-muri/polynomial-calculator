@@ -1,11 +1,8 @@
 package org.model;
 
-import java.util.AbstractMap;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Polynomial {
     Map<Integer, Number> monomials;
@@ -20,11 +17,7 @@ public class Polynomial {
         if(this.monomials.containsKey(inputKey)) {
             double newCoeff = this.monomials.get(inputKey).doubleValue() + inputValue;
             if(newCoeff != 0.0) {
-                if(newCoeff != (int)newCoeff) {
-                    this.monomials.put(inputKey, newCoeff);
-                } else {
-                    this.monomials.put(inputKey, (int)newCoeff);
-                }
+                this.monomials.put(inputKey, newCoeff);
             } else {
                 this.monomials.remove(inputKey);
             }
@@ -37,23 +30,27 @@ public class Polynomial {
         }
     }
 
+    public Map<Integer, Number> getMonomials() {
+        return monomials;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<Integer, Number> entry : monomials.entrySet()) {
+        for(Map.Entry<Integer, Number> entry : monomials.entrySet()) {
             int power = entry.getKey();
             Number coefficient = entry.getValue();
-            if (!sb.isEmpty() && coefficient.doubleValue() > 0) {
+            if(!sb.isEmpty() && coefficient.doubleValue() > 0) {
                 sb.append("+");
             }
-            if (coefficient.doubleValue() != 1 && coefficient.doubleValue() != -1 || power == 0) {
+            if(coefficient.doubleValue() != 1 && coefficient.doubleValue() != -1 || power == 0) {
                 sb.append(coefficient);
-            } else if (coefficient.doubleValue() == -1) {
+            } else if(coefficient.doubleValue() == -1) {
                 sb.append("-");
             }
-            if (power > 0) {
+            if(power > 0) {
                 sb.append("x");
-                if (power > 1) {
+                if(power > 1) {
                     sb.append("^").append(power);
                 }
             }
