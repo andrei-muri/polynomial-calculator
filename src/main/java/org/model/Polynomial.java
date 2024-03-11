@@ -14,62 +14,7 @@ public class Polynomial {
         this.monomials = new TreeMap<>(Comparator.reverseOrder());
     }
 
-    public Polynomial(String polynom) {
-        this.monomials = new TreeMap<>(Comparator.reverseOrder());
-        if(!extractPolynomials(polynom)) {
-            this.monomials =  null;
-            throw new IllegalArgumentException("Incorrect polynomial input");
-        }
-    }
-
-    private boolean extractPolynomials(String input) {
-        Pattern pattern = Pattern.compile("((^|[-+])\\b(\\d{1,9}(\\.\\d{1,4})?)?(x(\\^(\\d{1,2}))?)?)");
-        Matcher matcher = pattern.matcher(input);
-
-        int endOfLastMatch = 0;
-
-        while(matcher.find()) {
-            Map.Entry<Integer, Number> monomial = parseToMonomial(matcher);
-            addElement(monomial);
-            if(matcher.start() != endOfLastMatch) {
-                return false;
-            }
-            endOfLastMatch = matcher.end();
-        }
-
-        if (endOfLastMatch != input.length()) {
-            return false;
-        }
-        return true;
-    }
-
-    private Map.Entry<Integer, Number> parseToMonomial(Matcher match) {
-        Integer power;
-        double coeff;
-        if(match.group(3) == null) {
-            coeff = 1.0;
-        } else {
-            coeff = Double.parseDouble(match.group(3));
-        }
-        if(match.group(2).equals("-")) {
-                coeff = -(double)coeff;
-        }
-        if(match.group(7) != null) {
-            power = Integer.parseInt(match.group(7));
-        } else if(match.group(5) != null) {
-            power = 1;
-        } else {
-            power = 0;
-        }
-        int integerCoeff = (int)coeff;
-        if(coeff == (int)coeff) {
-            return new AbstractMap.SimpleEntry<>(power, integerCoeff);
-        } else {
-            return new AbstractMap.SimpleEntry<>(power, coeff);
-        }
-    }
-
-    private void addElement(Map.Entry<Integer, Number> monomial) {
+    public void addElement(Map.Entry<Integer, Number> monomial) {
         Integer inputKey = monomial.getKey();
         double inputValue = monomial.getValue().doubleValue();
         if(this.monomials.containsKey(inputKey)) {
@@ -98,9 +43,6 @@ public class Polynomial {
         for (Map.Entry<Integer, Number> entry : monomials.entrySet()) {
             int power = entry.getKey();
             Number coefficient = entry.getValue();
-//            if (coefficient.doubleValue() == 0) {
-//                continue;
-//            }
             if (!sb.isEmpty() && coefficient.doubleValue() > 0) {
                 sb.append("+");
             }

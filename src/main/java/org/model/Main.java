@@ -1,8 +1,13 @@
 package org.model;
 
+import org.logic.PolynomialController;
+
 public class Main {
     public static void main(String[] args) {
-        Polynomial polynomial = new Polynomial("-3x^2+7-7-3x^2+9.2x^5+3+6");
-        System.out.println(polynomial);
+        PolynomialController controller = new PolynomialController();
+        controller.addPolynomial("3x^2+4");
+        controller.addPolynomial("3x^2+7-7x^6");
+        controller.addPolynomial("9x^7+2-2-9x^7");
+        controller.printPolynomials();
     }
 }
