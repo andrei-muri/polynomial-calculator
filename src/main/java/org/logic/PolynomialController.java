@@ -2,6 +2,7 @@ package org.logic;
 
 import org.model.Polynomial;
 
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +49,27 @@ public class PolynomialController {
         for(Map.Entry<Integer, Number> monomial : p2.getMonomials().entrySet()) {
             p2.getMonomials().put(monomial.getKey(), (Double)monomial.getValue() * -1);
             result.addElement(monomial);
+        }
+        return result;
+    }
+
+    public Polynomial integrate(String input) {
+        Polynomial p = new Polynomial();
+        addPolynomial(input, p);
+        Polynomial result = new Polynomial();
+        for(Map.Entry<Integer, Number> monomial : p.getMonomials().entrySet()) {
+            double coeff;
+            int power;
+            if(monomial.getKey() == 0) {
+                power = 0;
+                coeff = 0;
+            } else {
+                coeff = (Double)monomial.getValue() / (monomial.getKey().doubleValue()+1);
+                power = monomial.getKey() + 1;
+            }
+
+            Map.Entry<Integer, Number> resultMonomial = new AbstractMap.SimpleEntry<>(power, coeff);
+            result.addElement(resultMonomial);
         }
         return result;
     }

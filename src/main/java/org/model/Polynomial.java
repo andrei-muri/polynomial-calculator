@@ -14,7 +14,7 @@ public class Polynomial {
     public void addElement(Map.Entry<Integer, Number> monomial) {
         Integer inputKey = monomial.getKey();
         double inputValue = monomial.getValue().doubleValue();
-        if(this.monomials.containsKey(inputKey)) {
+        if(this.monomials.containsKey(inputKey) && inputValue != 0) {
             double newCoeff = this.monomials.get(inputKey).doubleValue() + inputValue;
             if(newCoeff != 0.0) {
                 this.monomials.put(inputKey, newCoeff);
@@ -25,7 +25,7 @@ public class Polynomial {
                 this.monomials.put(0, 0.0);
             }
 
-        } else {
+        } else if (inputValue != 0){
             this.monomials.put(inputKey, inputValue);
         }
     }
