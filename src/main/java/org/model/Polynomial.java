@@ -22,11 +22,12 @@ public class Polynomial {
     }
 
     public void addElement(Map.Entry<Integer, Number> monomial) {
-        if(this.monomials.containsKey(0) && this.monomials.get(0).doubleValue() == 0.0) {
-            this.monomials.remove(0);
-        }
         Integer inputKey = monomial.getKey();
         double inputValue = monomial.getValue().doubleValue();
+        if(this.monomials.containsKey(0) && this.monomials.get(0).doubleValue() == 0.0 && inputValue != 0) {
+            this.monomials.remove(0);
+        }
+
         if(this.monomials.containsKey(inputKey) && inputValue != 0) {
             double newCoeff = this.monomials.get(inputKey).doubleValue() + inputValue;
             if(newCoeff != 0.0) {
@@ -34,7 +35,9 @@ public class Polynomial {
             } else {
                 this.monomials.remove(inputKey);
             }
-
+            if(this.monomials.isEmpty()) {
+                this.monomials.put(0,0.0);
+            }
 
         } else if (inputValue != 0){
             this.monomials.put(inputKey, inputValue);
@@ -62,7 +65,9 @@ public class Polynomial {
 
     public boolean isZero() {
         if(this.monomials instanceof TreeMap<Integer, Number> map) {
-            return map.firstEntry().getKey() == 0 && map.firstEntry().getValue().doubleValue() == 0.0;
+            if(!this.monomials.isEmpty()) {
+                return map.firstEntry().getKey() == 0 && map.firstEntry().getValue().doubleValue() == 0.0;
+            }
         }
         return false;
     }
