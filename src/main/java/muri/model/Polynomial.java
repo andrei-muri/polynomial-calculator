@@ -1,4 +1,4 @@
-package org.model;
+package muri.model;
 
 import java.util.AbstractMap;
 import java.util.Comparator;
@@ -153,24 +153,35 @@ public class Polynomial {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(Map.Entry<Integer, Number> entry : monomials.entrySet()) {
+        for (Map.Entry<Integer, Number> entry : monomials.entrySet()) {
             int power = entry.getKey();
-            Number coefficient = entry.getValue();
-            if(!sb.isEmpty() && coefficient.doubleValue() > 0) {
+            double coefficient = entry.getValue().doubleValue();
+
+            if (!sb.isEmpty() && coefficient > 0) {
                 sb.append("+");
             }
-            if(coefficient.doubleValue() != 1 && coefficient.doubleValue() != -1 || power == 0) {
-                sb.append(coefficient);
-            } else if(coefficient.doubleValue() == -1) {
+
+            // Formatting the coefficient to two decimal places
+            String formattedCoefficient = (coefficient != (long) coefficient)
+                    ? String.format("%.2f", coefficient)
+                    : String.valueOf((long) coefficient);
+
+            // Determine if we need the coefficient part
+            if (coefficient != 1 && coefficient != -1 || power == 0) {
+                sb.append(formattedCoefficient);
+            } else if (coefficient == -1 && power != 0) {
                 sb.append("-");
             }
-            if(power > 0) {
+
+            // Append the variable part
+            if (power > 0) {
                 sb.append("x");
-                if(power > 1) {
+                if (power > 1) {
                     sb.append("^").append(power);
                 }
             }
         }
         return sb.toString();
     }
+
 }

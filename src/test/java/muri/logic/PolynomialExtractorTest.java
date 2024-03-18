@@ -1,10 +1,10 @@
-package org.logic;
+package muri.logic;
 
+import muri.model.Polynomial;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.Arguments;
-import org.model.Polynomial;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -29,7 +29,7 @@ class PolynomialExtractorTest {
 
     static Stream<String> wrongStringToPolynomialArgumentProvider() {
         return Stream.of(
-                "--x^2", "x++3", "asdasx", "xasdasd", "a^3+a"
+                "--x^2", "x++3", "asdasx", "xasdasd", "a^3+a", ""
         );
     }
 

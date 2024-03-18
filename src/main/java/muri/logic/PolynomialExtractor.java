@@ -1,7 +1,8 @@
 
-package org.logic;
+package muri.logic;
 
-import org.model.Polynomial;
+import muri.model.Polynomial;
+
 import java.util.AbstractMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -33,8 +34,10 @@ public class PolynomialExtractor {
         Matcher matcher = pattern.matcher(input);
 
         int endOfLastMatch = 0;
+        boolean foundMatch = false;
 
         while(matcher.find()) {
+            foundMatch = true;
             p.addElement(parseToMonomial(matcher));
             if(matcher.start() != endOfLastMatch) {
                 throw wrongFormat;
@@ -42,7 +45,7 @@ public class PolynomialExtractor {
             endOfLastMatch = matcher.end();
         }
 
-        if (endOfLastMatch != input.length()) {
+        if (endOfLastMatch != input.length() || !foundMatch) {
             throw wrongFormat;
         }
         return p;

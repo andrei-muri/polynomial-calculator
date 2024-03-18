@@ -1,0 +1,5 @@
+package muri.logic;
+
+public enum Operation {
+    ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION, DIFFERENTIATION, INTEGRATION
+}

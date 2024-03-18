@@ -1,6 +1,6 @@
-package org.logic;
+package muri.logic;
 
-import org.model.Polynomial;
+import muri.model.Polynomial;
 
 import java.util.AbstractMap;
 import java.util.Map;

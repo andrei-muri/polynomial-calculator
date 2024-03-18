@@ -1,6 +1,6 @@
-package org.logic;
+package muri.logic;
 
-import org.model.Polynomial;
+import muri.model.Polynomial;
 
 /**
  * This is the class that handles the communication between the main controller and the {@link Polynomial}. It handles
