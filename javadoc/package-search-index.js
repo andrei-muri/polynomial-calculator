@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"muri"},{"l":"muri.logic"},{"l":"muri.model"},{"l":"muri.view"}];updateSearchResults();

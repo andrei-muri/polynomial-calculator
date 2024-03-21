@@ -10,9 +10,20 @@ import java.util.stream.Stream;
 class PolynomialControllerTest {
     static Stream<Arguments> addArgumentProvider() {
         return Stream.of(
-                        Arguments.of("x^3+6x-7", "x^3-7x^2-7x+3", "2x^3-7x^2-x-4"),
-                        Arguments.of("x^2+6x", "-x^2-6x", "0"),
-                        Arguments.of("x^7+6x", "-x^7+9", "6x+9")
+                Arguments.of("x^3+6x-7", "x^3-7x^2-7x+3", "2x^3-7x^2-x-4"),
+                Arguments.of("x^2+6x", "-x^2-6x", "0"),
+                Arguments.of("x^7+6x", "-x^7+9", "6x+9"),
+                Arguments.of("3x^2+5x-4", "x^2-2x+1", "4x^2+3x-3"),
+                Arguments.of("2x^2-4x+6", "x^2+x-1", "3x^2-3x+5"),
+                Arguments.of("x^3+2x^2-x-2", "-x^3-2x^2+x+2", "0"),
+                Arguments.of("3x^4-4x^3+x^2-5x+1", "2x^2-3x+4", "3x^4-4x^3+3x^2-8x+5"),
+                Arguments.of("x^2+4x+4", "-x^2-4x-4", "0"),
+                Arguments.of("2x^3-3x+2", "x^2-1", "2x^3+x^2-3x+1"),
+                Arguments.of("x^2-9", "9-x^2", "0"),
+                Arguments.of("x^2+x", "x^3+x^2", "x^3+2x^2+x"),
+                Arguments.of("x^3-3x+2", "2x-4", "x^3-x-2"),
+                Arguments.of("3x-6", "3x+6", "6x"),
+                Arguments.of("x^2+3x+2", "x+1", "x^2+4x+3")
         );
     }
 
@@ -27,7 +38,18 @@ class PolynomialControllerTest {
         return Stream.of(
                 Arguments.of("x^3+6x-7", "x^3-7x^2-7x+3", "7x^2+13x-10"),
                 Arguments.of("x^2+6x", "+x^2+6x", "0"),
-                Arguments.of("x^7+6x", "-x^7+9", "2x^7+6x-9")
+                Arguments.of("x^7+6x", "-x^7+9", "2x^7+6x-9"),
+                Arguments.of("3x^2+5x-4", "-x^2+2x-1", "4x^2+3x-3"),
+                Arguments.of("2x^2-4x+6", "-x^2-x+1", "3x^2-3x+5"),
+                Arguments.of("x^3+2x^2-x-2", "-x^3-2x^2+x+2", "2x^3+4x^2-2x-4"),
+                Arguments.of("3x^4-4x^3+x^2-5x+1", "-2x^2+3x-4", "3x^4-4x^3+3x^2-8x+5"),
+                Arguments.of("x^2+4x+4", "-x^2-4x-4", "2x^2+8x+8"),
+                Arguments.of("2x^3-3x+2", "-x^2+1", "2x^3+x^2-3x+1"),
+                Arguments.of("x^2-9", "-9+x^2", "0"),
+                Arguments.of("x^2+x", "-x^3-x^2", "x^3+2x^2+x"),
+                Arguments.of("x^3-3x+2", "-2x+4", "x^3-x-2"),
+                Arguments.of("3x-6", "-3x-6", "6x"),
+                Arguments.of("x^2+3x+2", "-x-1", "x^2+4x+3")
         );
     }
 

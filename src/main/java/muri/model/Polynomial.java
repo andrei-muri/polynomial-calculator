@@ -161,19 +161,16 @@ public class Polynomial {
                 sb.append("+");
             }
 
-            // Formatting the coefficient to two decimal places
             String formattedCoefficient = (coefficient != (long) coefficient)
                     ? String.format("%.2f", coefficient)
                     : String.valueOf((long) coefficient);
 
-            // Determine if we need the coefficient part
             if (coefficient != 1 && coefficient != -1 || power == 0) {
                 sb.append(formattedCoefficient);
             } else if (coefficient == -1 && power != 0) {
                 sb.append("-");
             }
 
-            // Append the variable part
             if (power > 0) {
                 sb.append("x");
                 if (power > 1) {

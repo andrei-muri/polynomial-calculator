@@ -1,5 +1,6 @@
 package muri.logic;
 
+import muri.model.Operation;
 import muri.view.CalculatorView;
 
 public class CalculatorController {
